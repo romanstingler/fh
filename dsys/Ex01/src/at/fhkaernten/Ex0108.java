@@ -23,7 +23,7 @@ public class Ex0108 {
 		ClockTime cl2 = null;
 		Scanner sc = new Scanner(System.in);
 		System.out
-				.println("\nEingabeformat hh:mm:ss (Minuten und Sekunden Optional(10:30:40))");
+				.println("\nEingabeformat hh,mm,ss (Minuten und Sekunden Optional(10,30,40))");
 		System.out.println("Eingabe Uhrzeit 1: ");
 		String c1 = sc.next();
 		String[] ary1 = c1.split(":");

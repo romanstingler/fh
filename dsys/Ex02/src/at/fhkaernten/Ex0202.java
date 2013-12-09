@@ -1,29 +1,52 @@
 package at.fhkaernten;
 
+import java.util.Scanner;
+
 public class Ex0202 {
-	public static void main(String[] args) throws InterruptedException {
 
-		XThread xt1 = new XThread();
-		XThread xt2 = new XThread();
-		XThread xt3 = new XThread();
+	static int N = 3;
 
-		Thread t1 = new Thread(xt1);
-		Thread t2 = new Thread(xt2);
-		Thread t3 = new Thread(xt3);
+	public static void main(String[] args) {
+		// 2.1
 
-		t1.start();
-		t2.start();
-		t3.start();
+		Scanner sc = new Scanner(System.in);
+		Threads1[] r = new Threads1[N];
+		Thread[] t = new Thread[N];
+		String abort;
 
-		Thread.sleep(1000);
-		xt1.haltRun();
-		t1.join();
-		Thread.sleep(2000);
-		xt2.haltRun();
-		t2.join();
-		Thread.sleep(2000);
-		xt3.haltRun();
-		t3.join();
+		Threads1.createThreadArray(t, r);
+
+		do {
+			System.out.println("Sollen die Threads beendet werden? [y/n]");
+			abort = sc.next();
+		} while (!abort.equals("y"));
+
+		Threads1.stopThreadArray(r);
+
+		// 2.2
+
+		System.out.println("Wie viele Threads sollen erzeugt werden?");
+		int n = sc.nextInt();
+		r = new Threads1[n];
+		t = new Thread[n];
+		int[] delay = new int[n];
+		for (int i = 0; i < n; i++) {
+			System.out.println("Delay für Thread " + (i + 1));
+			delay[i] = sc.nextInt();
+		}
+
+		Threads1.createThreadArray(t, r, delay);
+
+		do {
+			System.out.println("Sollen die Threads beendet werden? [y/n]");
+			abort = sc.next();
+		} while (!abort.equals("y"));
+
+		Threads1.stopThreadArray(r);
+
+		(new Thread(new ClockThread())).start();
+
+		sc.close();
 
 	}
 

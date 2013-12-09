@@ -6,23 +6,29 @@ public class Ex0203 {
 
 	public static void main(String[] args) throws InterruptedException {
 		// 3.1
+		int n = 0;
 		Scanner sc = new Scanner(System.in);
-		int num = 0;
 
-		System.out.println("Enter number of threads: ");
-		num = sc.nextInt();
-		CalcSquareThread[] t = new CalcSquareThread[num];
+		System.out.println("Anzahl Threads: ");
+		n = sc.nextInt();
+		sc.close();
 
-		for (int i = 0; i < num; i++) {
-			t[i] = new CalcSquareThread(0, 1000000000l);
+		long start = System.currentTimeMillis();
+		Threads2[] t = new Threads2[n];
+		for (int i = 0; i < n; i++) {
+			t[i] = new Threads2();
 			t[i].start();
 		}
 
 		// 3.3
-		for (int i = 0; i < num; i++) {
+
+		for (int i = 0; i < n; i++) {
 			t[i].join();
-			System.out.println(t[i].getSum());
+			System.out.println("Thread: " + t[i].getId() + " Ergebnis: "
+					+ t[i].getSum());
 		}
-		sc.close();
+		long end = System.currentTimeMillis();
+		System.out.println("Zeit: " + (end - start) + "ms");
 	}
+
 }

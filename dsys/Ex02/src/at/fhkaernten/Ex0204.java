@@ -3,38 +3,46 @@ package at.fhkaernten;
 import java.util.Scanner;
 
 public class Ex0204 {
+
 	public static void main(String[] args) throws InterruptedException {
-
 		// 4.1
+		int n = 0;
+		double erg = 0;
 		Scanner sc = new Scanner(System.in);
-		int num = 0;
-		double from = 0;
-		double to = 1000000000l;
-		double sum = 0;
 
-		System.out.println("Enter number of threads: ");
-		num = sc.nextInt();
-		CalcSquareThread[] t = new CalcSquareThread[num];
+		System.out.println("Anzahl Threads: ");
+		n = sc.nextInt();
+		System.out.println("Endwert: ");
+		long endw = sc.nextLong();
+		if (n > endw)
+			n = (int) endw;
+		sc.close();
+		double range = (double) endw / n;
 
-		long x = (long) (to / num);
 		long start = System.currentTimeMillis();
-		for (int i = 0; i < num; i++) {
-			from = i * x + 1;
-			to = (i + 1) * x;
-			t[i] = new CalcSquareThread(from, to);
+		Threads2[] t = new Threads2[n];
+		for (int i = 0; i < n; i++) {
+			t[i] = new Threads2((long) (1 + (range * i)),
+					(long) (range + (range * i)));
 			t[i].start();
 		}
 
-		// 4.3
-		for (int i = 0; i < num; i++) {
+		// 4.2
+		for (int i = 0; i < n; i++) {
 			t[i].join();
-			sum += t[i].getSum();
+			erg += t[i].getSum();
 		}
 		long end = System.currentTimeMillis();
-		System.out.println(sum);
-		System.out.println("Duration: " + (end - start) + "ms");
 
-		sc.close();
+		// 4.3
+		// Die optimale Anzahl von Threads hängt von der Anzahl der CPU-Kerne
+		// und Technologien wie Hyperthreading ab.
+		// Im Allgemeinen sollte das beste Ergebnis bei Threads = Anzahl
+		// logische Kerne zu erzielen sein. Es zeigen sich aber auch
+		// Unterschiede bei verschiedenen Java VMs (Oracle, Open JDK) und
+		// Betriebssystemen.
+
+		System.out.println("Ergebnis: " + erg);
+		System.out.println("Zeit: " + (end - start) + "ms");
 	}
-
 }
