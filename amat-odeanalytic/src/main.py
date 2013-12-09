@@ -11,6 +11,7 @@ from CalcInitialValProblem import CalcInitialValProblem
 from CalcGeneralSolution import CalcGeneralSolution
 from sympy import init_printing
 import sympy as sym
+from OdeSolver import odeplot
 
 import argparse
 from pprint import pprint
@@ -86,6 +87,8 @@ if __name__ == '__main__':
         print("Solution of the initial value problem:")
         print(sym.simplify(valProb))
         sym.pprint(sym.simplify(valProb))
+        
+    odeplot(sym.simplify(valProb))
 
 
 pass
