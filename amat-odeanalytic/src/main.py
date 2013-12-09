@@ -18,19 +18,29 @@ from pprint import pprint
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Script for finding the fundamental matrix of a system.')
-    parser.add_argument('-m', '--matrix', help='Matrix', required=True)
+    parser.add_argument('-m', '--matrix', help='Matrix', required=False)
     parser.add_argument(
         '-x', '--initialvalue', help='Initial value', required=False)
     parser.add_argument(
         '-t0', '--initialt', help='Initital value t', required=False)
 
     args = parser.parse_args()
-    a = matrix(args.matrix)
+    # a = matrix(args.matrix)
+    
     t = sym.Symbol('t', real=True)
-    b = sym.exp(2 * t) * sym.Matrix([[0], [1], [1]])
-    x0 = matrix(args.initialvalue)
-    t0 = args.initialt
-
+    b = sym.exp(2 * t) * sym.Matrix([[0], [0], [0], [0], [0], [0]])
+    
+    # x0 = matrix(args.initialvalue)
+    # t0 = args.initialt
+    
+    e = 1.60219e-19;
+    B0 = 1e-11;
+    m = 0.91096e-30;
+    omega = e * B0 / m;
+    a = matrix([[0, 1, 0, 0, 0, 0], [0, 0, 0, -omega, 0, 0], [0, 0, 0, 1, 0, 0], [0, omega, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0]])
+    x0 = matrix([[0], [1], [0], [1], [0], [1]])
+    t0 = 0
+    
     set_printoptions(precision=4)
     genVectors = CalcGenVectorBasis(a)
     fundSystem = CalcFundSys(
