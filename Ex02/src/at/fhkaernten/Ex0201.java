@@ -85,19 +85,19 @@ public class Ex0201 {
 		// The best thing to do would be to synchronize/wait/notify on a shared
 		// variable.
 		// Thread1:
-		// Object shared = new Object();
-		// startThread2(shared);
-		// synchronized (shared) {
-		// 	while (taskNotDone())
-		// 	shared.wait();
-		// }
+		// 		Object shared = new Object();
+		// 		startThread2(shared);
+		// 		synchronized (shared) {
+		// 			while (taskNotDone())
+		// 			shared.wait();
+		// 		}
 		// Thread2:
 		// shared was saved at the start of the thread
 		// processing stuff
-		// markTaskAsDone();
-		// synchronized (shared) {
-		// 	shared.notify();
-		// }
+		// 		markTaskAsDone();
+		// 		synchronized (shared) {
+		// 			shared.notify();
+		// 		}
 	}
 
 }
