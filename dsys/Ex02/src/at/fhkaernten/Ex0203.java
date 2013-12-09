@@ -24,9 +24,8 @@ public class Ex0203 {
 
 		for (int i = 0; i < n; i++) {
 			t[i].join();
-			System.out.println("Thread: " + t[i].getId() + " Ergebnis: "
-					+ t[i].getSum());
 		}
+
 		long end = System.currentTimeMillis();
 		System.out.println("Zeit: " + (end - start) + "ms");
 	}
