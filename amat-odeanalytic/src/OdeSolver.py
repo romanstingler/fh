@@ -24,20 +24,20 @@ def heun(f, x0, t):
     return x
 
 def odeplot(x_analytic):
-    abserr = 1e-8
-    relerr = 1e-6
-    stoptime = 20
+    abserr = 1e-12
+    relerr = 1e-12
+    stoptime = 10
     numpoints = 250
     tn = [stoptime * float(i) / (numpoints - 1) for i in range(numpoints)]
     t = sym.Symbol('t', real=True)
     x0 = numpy.array([0, 1, 0, 1, 0, 1])
     x_exact = numpy.zeros((len(tn), len(x0)))
-    
+
     k = 0
     for i in tn:
         x_exact[k] = np.asarray(x_analytic.subs(t, i).evalf()).T
         k += 1
-        
+
     def f(x0, tn):
         e = 1.602 * 10 ** -19
         B0 = 10 ** -11
@@ -57,10 +57,10 @@ def odeplot(x_analytic):
 
     fig = plt.figure()
     ax = fig.add_subplot(1, 2, 1, projection='3d', label='electron movement')
-    ax.plot(x_exact[:, 0], x_exact[:, 2], x_exact[:, 4], 'r', label='analytic')
-    ax.plot(x_euler[:, 0], x_euler[:, 2], x_euler[:, 4], 'b.', label='euler')
-    ax.plot(x_heun[:, 0], x_heun[:, 2], x_heun[:, 4], 'y+', label='heun')
-    ax.plot(wsol[:, 0], wsol[:, 2], wsol[:, 4], 'k-', label='LSODA')
+    ax.plot(x_exact[:, 0], x_exact[:, 2], x_exact[:, 4], color=((0,0,0,1)), lw=2, label='analytic')
+    ax.plot(x_euler[:, 0], x_euler[:, 2], x_euler[:, 4], color=((1,0,0.2,0.8)), lw=2, label='euler')
+    ax.plot(x_heun[:, 0], x_heun[:, 2], x_heun[:, 4], color=((0,0,1,0.5)), lw=2, label='heun')
+    ax.plot(wsol[:, 0], wsol[:, 2], wsol[:, 4], color=((0,1,0,0.8)), lw=2, label='LSODA')
     ax.set_xlabel("X Axis")
     ax.set_ylabel("Y Axis")
     ax.set_zlabel("Z Axis")
@@ -68,8 +68,9 @@ def odeplot(x_analytic):
     title('Solutions of electron movement')
 
     subplot(1, 2, 2)
-    plot(tn, numpy.sqrt(x_euler[:, 0] ** 2 - wsol[:, 0] ** 2 + x_euler[:, 2] ** 2 - wsol[:, 2] ** 2 + x_euler[:, 4] ** 2 - wsol[:, 4] ** 2), 'b-x',
-         tn, numpy.sqrt(x_heun[:, 0] ** 2 - wsol[:, 0] ** 2 + x_heun[:, 2] ** 2 - wsol[:, 2] ** 2 + x_heun[:, 4] ** 2 - wsol[:, 4] ** 2), 'g')
+    plot(tn, numpy.abs(x_euler[:, 0])- numpy.abs(x_exact[:, 0]) + numpy.abs(x_euler[:, 2]) - numpy.abs(x_exact[:, 2]) + numpy.abs(x_euler[:, 4]) - numpy.abs(x_exact[:, 4]), 'r',
+         tn, numpy.abs(x_heun[:, 0])- numpy.abs(x_exact[:, 0]) + numpy.abs(x_heun[:, 2]) - numpy.abs(x_exact[:, 2]) + numpy.abs(x_heun[:, 4]) - numpy.abs(x_exact[:, 4]), 'g',
+         tn, numpy.abs(wsol[:, 0])- numpy.abs(x_exact[:, 0]) + numpy.abs(wsol[:, 2]) - numpy.abs(x_exact[:, 2]) + numpy.abs(wsol[:, 4]) - numpy.abs(x_exact[:, 4]), 'k')
     xlabel('$t$')
     ylabel('$x - x^*$')
     title('Errors in solutions')
