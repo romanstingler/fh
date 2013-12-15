@@ -11,9 +11,11 @@ public class Client {
 		try {
 			Hello helloref = (Hello) Naming.lookup("rmi://localhost/hello");
 			System.out.println("Client - " + helloref.sayHello("Test"));
-			MessageObject mo = helloref.getMessageObject();
-			System.out.println("Client - " + mo);
-			
+			for (int i = 0; i < 10; i++) {
+				MessageObject mo = helloref.getMessageObject();
+				System.out.println("Client - " + mo);
+			}
+
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
