@@ -9,6 +9,7 @@ public class Ex0501 {
 	// which must be visible by event B, before B starts reading it.
 
 	// 5.2
+
 	// A system provides causal consistency if memory operations that
 	// are causally related are seen by every node of the system in
 	// the same order.
