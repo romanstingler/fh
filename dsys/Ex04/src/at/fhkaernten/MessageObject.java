@@ -12,6 +12,10 @@ public class MessageObject implements Serializable {
 	public MessageObject() {
 		this.objNumber = ++number;
 	}
+	
+	public MessageObject(int objNumber) {
+		this.objNumber = objNumber;
+	}
 
 	public static int getNumber() {
 		return number;

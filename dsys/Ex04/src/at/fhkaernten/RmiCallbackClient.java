@@ -34,7 +34,7 @@ public class RmiCallbackClient extends UnicastRemoteObject implements
 	public static void main(String[] args) throws RemoteException {
 		Remote server = null;
 		RmiCallbackServerI rmiserver = null;
-		
+
 		try {
 			server = Naming.lookup("rmi://localhost/rmicallback");
 		} catch (MalformedURLException e) {
@@ -71,8 +71,8 @@ public class RmiCallbackClient extends UnicastRemoteObject implements
 				System.exit(1);
 			}
 		}
-		
-		for(int i = 2; i<= N; i++) {
+
+		for (int i = 2; i <= N; i++) {
 			rmiserver.sendData(i);
 		}
 	}

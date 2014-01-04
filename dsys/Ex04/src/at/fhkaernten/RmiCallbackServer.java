@@ -23,6 +23,7 @@ public class RmiCallbackServer extends UnicastRemoteObject implements
 	@Override
 	public void register(RmiCallbackClientI client) throws RemoteException {
 		clients.put(client.getName(), client);
+		System.out.println("Registerd client " + client.getName());
 	}
 
 	@Override
