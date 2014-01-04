@@ -13,8 +13,8 @@
    height="1052.3622047"
    id="svg6444"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="New document 19">
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Ex0503.svg">
   <defs
      id="defs6446">
     <marker
@@ -209,14 +209,14 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
      inkscape:cx="339.89308"
-     inkscape:cy="565.49377"
+     inkscape:cy="646.30597"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1021"
+     inkscape:window-height="1056"
      inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-y="24"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata6449">
@@ -226,7 +226,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -501,14 +501,14 @@
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="44.446709"
-       y="516.98132"
+       x="46.446709"
+       y="560.98132"
        id="text9632"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9634"
-         x="44.446709"
-         y="516.98132">[5,5,4]</tspan></text>
+         x="46.446709"
+         y="560.98132">[5,5,4]</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -531,5 +531,20 @@
          id="tspan9642"
          x="408.10162"
          y="417.98636">[1,6,5]</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="45.738884"
+       y="517.74792"
+       id="text9632-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9634-8"
+         x="45.738884"
+         y="517.74792">[0,0,1] &lt; [4,5,4]</tspan><tspan
+         sodipodi:role="line"
+         x="45.738884"
+         y="542.74792"
+         id="tspan3086">Verletzung Kausalität</tspan></text>
   </g>
 </svg>
