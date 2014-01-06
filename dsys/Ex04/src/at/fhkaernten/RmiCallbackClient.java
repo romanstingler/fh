@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Scanner;
 
 public class RmiCallbackClient extends UnicastRemoteObject implements
 		RmiCallbackClientI {
@@ -32,6 +33,14 @@ public class RmiCallbackClient extends UnicastRemoteObject implements
 	}
 
 	public static void main(String[] args) throws RemoteException {
+		if (args.length < 1) {
+			System.out
+					.println("USAGE: java at.fhkaernten.RMICallbackClient <ID>");
+			System.exit(1);
+		}
+
+		Scanner sc = new Scanner(System.in);
+
 		Remote server = null;
 		RmiCallbackServerI rmiserver = null;
 
@@ -59,21 +68,39 @@ public class RmiCallbackClient extends UnicastRemoteObject implements
 			System.exit(1);
 		}
 
-		RmiCallbackClientI[] client = new RmiCallbackClientI[N];
-
-		for (int i = 0; i < N; i++) {
-			try {
-				client[i] = new RmiCallbackClient("Test" + i);
-				rmiserver.register(client[i]);
-			} catch (RemoteException e) {
-				System.out.println("Could not create client object.");
-				e.printStackTrace();
-				System.exit(1);
-			}
+		try {
+			RmiCallbackClientI client = new RmiCallbackClient(args[0]);
+			rmiserver.register(client);
+		} catch (RemoteException e) {
+			System.out.println("Could not create client object.");
+			e.printStackTrace();
+			System.exit(1);
 		}
 
-		for (int i = 2; i <= N; i++) {
-			rmiserver.sendData(i);
-		}
+		int mult;
+		do {
+			System.out.println("Zahl eingeben:");
+			mult = sc.nextInt();
+			rmiserver.sendData(mult);
+		} while (mult != 0);
+
+		sc.close();
+
+		// RmiCallbackClientI[] client = new RmiCallbackClientI[N];
+		//
+		// for (int i = 0; i < N; i++) {
+		// try {
+		// client[i] = new RmiCallbackClient("Test" + i);
+		// rmiserver.register(client[i]);
+		// } catch (RemoteException e) {
+		// System.out.println("Could not create client object.");
+		// e.printStackTrace();
+		// System.exit(1);
+		// }
+		// }
+		//
+		// for (int i = 2; i <= N; i++) {
+		// rmiserver.sendData(i);
+		// }
 	}
 }
