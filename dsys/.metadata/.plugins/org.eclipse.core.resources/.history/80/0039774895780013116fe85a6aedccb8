@@ -1,0 +1,17 @@
+package at.fhkaernten;
+
+public class Ex0401 {
+
+	// Serialization is the process of converting an object's state (including
+	// its references) to a sequence of bytes, as well as the process of
+	// rebuilding those bytes into a live object at some future time.
+	// Simple......Coverting an object to bytes and bytes back to object. So
+	// when is serialization used? Serialization is used when you want to
+	// persist the object. It is also used by RMI to pass objects between JVMs,
+	// either as arguments in a method invocation from a client to a server or
+	// as return values from a method invocation. In general, serialization is
+	// used when we want the object to exist beyond the lifetime of the JVM.
+
+	//
+
+}

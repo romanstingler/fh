@@ -7,7 +7,7 @@ public class MessageObject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static int number = 0;
-	private int objNumber = 0;
+	private static int objNumber = 0;
 
 	public MessageObject() {
 		this.objNumber = ++number;
@@ -21,13 +21,14 @@ public class MessageObject implements Serializable {
 		return number;
 	}
 
-	public int getObjNumber() {
+	public static int getObjNumber() {
 		return objNumber;
 	}
 
 	@Override
 	public String toString() {
-		return ("Number: " + this.getObjNumber() + " objNumber: " + MessageObject.getNumber());
+		return ("Number: " + this.getObjNumber() + " objNumber: " + MessageObject
+				.getNumber());
 
 	}
 

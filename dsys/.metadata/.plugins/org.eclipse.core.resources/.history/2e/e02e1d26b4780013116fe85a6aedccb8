@@ -3,7 +3,7 @@ package at.fhkaernten;
 public class Ex0401 {
 
 	// It can be seen that the object Number is incremented on the server and on
-	// the client, the object objNumber is just incremented on the server.
+	// the client the object objNumber is just incremented on the server.
 	//
 	//
 
