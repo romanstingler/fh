@@ -27,7 +27,7 @@ public class MessageObject implements Serializable {
 
 	@Override
 	public String toString() {
-		return ("Number: " + this.getObjNumber() + " objNumber: " + MessageObject.getNumber());
+		return ("Number: " + getNumber() + " objNumber: " + getObjNumber());
 
 	}
 

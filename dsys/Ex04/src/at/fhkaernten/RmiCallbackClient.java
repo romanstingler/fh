@@ -35,7 +35,7 @@ public class RmiCallbackClient extends UnicastRemoteObject implements
 	public static void main(String[] args) throws RemoteException {
 		if (args.length < 1) {
 			System.out
-					.println("USAGE: java at.fhkaernten.RMICallbackClient <ID>");
+					.println("USAGE: java at.fhkaernten.RmiCallbackClient <ID>");
 			System.exit(1);
 		}
 
