@@ -5,7 +5,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class RMIClient {
+public class RmiClient {
 
 	public static void main(String[] args) {
 		try {
