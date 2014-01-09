@@ -14,7 +14,7 @@ public class RmiCallbackClient extends UnicastRemoteObject implements
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private int mul = 1;
-//	private final static int N = 10;
+	private final static int N = 10;
 
 	public RmiCallbackClient(String name) throws RemoteException {
 		super();

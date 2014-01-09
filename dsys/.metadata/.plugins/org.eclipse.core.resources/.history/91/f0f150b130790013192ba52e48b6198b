@@ -2,9 +2,10 @@ package at.fhkaernten;
 
 public class Ex0401 {
 
-	// It can be seen that 'Number' is incremented on the server and on
-	// the client, 'objNumber' is just incremented on the server.
-	// This is due to the fact that number is static.
+	// It can be seen that the object Number is incremented on the server and on
+	// the client, the object objNumber is just incremented on the server.
+	//
+	//
 
 
 	// Server - Hello Test
@@ -53,6 +54,8 @@ public class Ex0401 {
 	// Client - Number: 19 objNumber: 0
 	// Client - Number: 20 objNumber: 0
 
+	
+	
 	// Serialization is the process of converting an object's state to a
 	// sequence of bytes. Serialization is used when you want to
 	// persist an object. It is also used by RMI to pass objects between JVMs,

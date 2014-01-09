@@ -4,8 +4,9 @@ public class Ex0401 {
 
 	// It can be seen that 'Number' is incremented on the server and on
 	// the client, 'objNumber' is just incremented on the server.
-	// This is due to the fact that number is static.
-
+	// This is due to the fact that number is static and therefore it belongs to
+	// a class and not a specific object.
+	//
 
 	// Server - Hello Test
 	// Number: 1 objNumber: 1
