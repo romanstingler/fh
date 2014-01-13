@@ -6,6 +6,9 @@ import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Client extends UnicastRemoteObject implements CommunicationI {
@@ -15,6 +18,10 @@ public class Client extends UnicastRemoteObject implements CommunicationI {
 	private int id;
 
 	private List<ClientAddress> clients;
+
+	private DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss:SSS");
+
+	private Date date = new Date();
 
 	/**
 	 * Timestamp when entry into CS was requested. Null if no request is active.
@@ -38,12 +45,17 @@ public class Client extends UnicastRemoteObject implements CommunicationI {
 
 		// I do not want to go into CS anyway - proceed!
 		if (csRequestTs == null) {
-			System.out.println("I do not want to go into CS anyway - proceed!");
+			System.out
+					.println("["
+							+ dateFormat.format(date)
+							+ "] I do not want to go into CS anyway - proceed! TS other: "
+							+ ts);
 			return;
 		}
 		if (ts.isSmaller(csRequestTs)) {
-			System.out
-					.println("Your ts is smaller, i.e. you asked earlier - proceed!");
+			System.out.println("[" + dateFormat.format(date)
+					+ "] Your ts is smaller (" + ts + " < " + this.ts
+					+ ")- proceed!");
 			return;
 		}
 
@@ -55,11 +67,16 @@ public class Client extends UnicastRemoteObject implements CommunicationI {
 			}
 			if (csRequestTs == null) {
 				System.out
-						.println("I no langer want to go into the CS - proceed!");
+						.println("["
+								+ dateFormat.format(date)
+								+ "] I no langer want to go into the CS - proceed! TS other: "
+								+ ts);
 				return;
 			}
 			if (ts.isSmaller(csRequestTs)) {
-				System.out.println("Your ts is now smaller - proceed!");
+				System.out.println("[" + dateFormat.format(date)
+						+ "] Your ts is now smaller (" + ts + " < " + this.ts
+						+ ")- proceed!");
 				return;
 			}
 
@@ -87,15 +104,16 @@ public class Client extends UnicastRemoteObject implements CommunicationI {
 			}
 
 			// Enter critical section
-			System.out.println("==== CLIENT " + id
-					+ " ENTERING CRITICAL SECTION ====");
+			int sleep = (int) (Math.random() * 8000) + 2000;
+			System.out.println("[" + dateFormat.format(date) + "] ==== CLIENT "
+					+ id + " ENTERING CRITICAL SECTION FOR " + sleep + " MSEC ====");
 
 			// Sleep
-			Thread.sleep((int) (Math.random() * 8000) + 2000);
+			Thread.sleep(sleep);
 
 			// Leave critical section
-			System.out.println("==== CLIENT " + id
-					+ " LEAVING CRITICAL SECTION ====");
+			System.out.println("[" + dateFormat.format(date) + "] ==== CLIENT "
+					+ id + " LEAVING CRITICAL SECTION ====");
 
 			csRequestTs = null;
 			// Loop
