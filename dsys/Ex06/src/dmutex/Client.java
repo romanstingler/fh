@@ -54,7 +54,7 @@ public class Client extends UnicastRemoteObject implements CommunicationI {
 		}
 		if (ts.isSmaller(csRequestTs)) {
 			System.out.println("[" + dateFormat.format(date)
-					+ "] Your ts is smaller (" + ts + " < " + this.ts
+					+ "] Your ts is smaller (" + ts + " < " + csRequestTs
 					+ ")- proceed!");
 			return;
 		}
@@ -75,7 +75,7 @@ public class Client extends UnicastRemoteObject implements CommunicationI {
 			}
 			if (ts.isSmaller(csRequestTs)) {
 				System.out.println("[" + dateFormat.format(date)
-						+ "] Your ts is now smaller (" + ts + " < " + this.ts
+						+ "] Your ts is now smaller (" + ts + " < " + csRequestTs
 						+ ")- proceed!");
 				return;
 			}
