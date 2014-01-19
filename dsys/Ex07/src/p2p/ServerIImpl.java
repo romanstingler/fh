@@ -46,11 +46,16 @@ public class ServerIImpl extends UnicastRemoteObject implements ServerI {
 	public GlobalFileInfo[] query(String keyword) throws RemoteException {
 		ArrayList<GlobalFileInfo> result = new ArrayList<GlobalFileInfo>();
 
-		for (GlobalFileInfo gfi : files) {
-			if (gfi.fileName.equals(keyword)) {
-				result.add(gfi);
+		if (keyword.isEmpty())
+			result.addAll(files);
+		else {
+			for (GlobalFileInfo gfi : files) {
+				if (gfi.fileName.equals(keyword)) {
+					result.add(gfi);
+				}
 			}
 		}
+
 		GlobalFileInfo[] resultlist = new GlobalFileInfo[result.size()];
 		for (int i = 0; i < result.size(); i++) {
 			resultlist[i] = result.get(i);
@@ -67,7 +72,7 @@ public class ServerIImpl extends UnicastRemoteObject implements ServerI {
 			if (gfi.client.equals(client))
 				removecandidates.add(gfi);
 		}
-		
+
 		files.removeAll(removecandidates);
 		connectedClients.remove(client);
 
