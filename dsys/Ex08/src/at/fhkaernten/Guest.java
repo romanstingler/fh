@@ -1,12 +1,19 @@
 package at.fhkaernten;
 
+import java.util.concurrent.Semaphore;
+
 public class Guest implements Runnable {
-	private Sauna sauna;
+	// private Sauna sauna;
+	private Semaphore sauna;
 	private int out = 0;
 
 	private boolean stop = false;
 
-	public Guest(Sauna sauna) {
+	// public Guest(Sauna sauna) {
+	// this.sauna = sauna;
+	// }
+
+	public Guest(Semaphore sauna) {
 		this.sauna = sauna;
 	}
 
@@ -19,13 +26,16 @@ public class Guest implements Runnable {
 		while (!stop) {
 
 			try {
-				sauna.goIn();
+				sauna.acquire();
+				;
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
 
 			System.out.println(Thread.currentThread().getId()
-					+ " geht in Sauna.");
+					+ " geht in Sauna. Freie Plätze: "
+					+ sauna.availablePermits());
+
 			out++;
 
 			try {
@@ -34,13 +44,14 @@ public class Guest implements Runnable {
 				e1.printStackTrace();
 			}
 
-			sauna.goOut();
+			sauna.release();
 
 			System.out.println(Thread.currentThread().getId()
-					+ " kommt aus Sauna.");
+					+ " kommt aus Sauna. Freie Plätze: "
+					+ sauna.availablePermits());
 
 			try {
-				Thread.sleep(1000);
+				Thread.sleep((int) (Math.random() * 5000) + 1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

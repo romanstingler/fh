@@ -1,24 +1,26 @@
 package at.fhkaernten;
 
 import java.util.Scanner;
+import java.util.concurrent.Semaphore;
 
 public class Ex0802 {
 
+	public final static int MAX_GUESTS = 10;
+	public final static int SEATS = 4;
+
 	public static void main(String[] args) throws InterruptedException {
 
-		Sauna sauna = new Sauna(2);
+		Semaphore sauna = new Semaphore(SEATS);
+		// Sauna sauna = new Sauna(SEATS);
 
-		Guest r1 = new Guest(sauna);
-		Guest r2 = new Guest(sauna);
-		Guest r3 = new Guest(sauna);
+		Guest[] guests = new Guest[MAX_GUESTS];
+		Thread[] threads = new Thread[MAX_GUESTS];
 
-		Thread g1 = new Thread(r1);
-		Thread g2 = new Thread(r2);
-		Thread g3 = new Thread(r3);
-
-		g1.start();
-		g2.start();
-		g3.start();
+		for (int i = 0; i < MAX_GUESTS; i++) {
+			guests[i] = new Guest(sauna);
+			threads[i] = new Thread(guests[i]);
+			threads[i].start();
+		}
 
 		Scanner sc = new Scanner(System.in);
 		String exit = "n";
@@ -30,17 +32,13 @@ public class Ex0802 {
 
 		sc.close();
 
-		r1.stopp();
-		r2.stopp();
-		r3.stopp();
+		for (int i = 0; i < MAX_GUESTS; i++) {
+			guests[i].stopp();
+			threads[i].join();
+		}
 
-		g1.join();
-		g2.join();
-		g3.join();
-
-		System.out.println("Gast 1 war " + r1.getOut() + " mal in Sauna.");
-		System.out.println("Gast 2 war " + r2.getOut() + " mal in Sauna.");
-		System.out.println("Gast 3 war " + r3.getOut() + " mal in Sauna.");
+		for (int i = 0; i < MAX_GUESTS; i++)
+			System.out.println("Gast " + threads[i].getId() + " war "
+					+ guests[i].getOut() + " mal in Sauna.");
 	}
-
 }

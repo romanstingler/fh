@@ -9,14 +9,22 @@ public class Sauna {
 		this.occupiedSeats = 0;
 	}
 
-	public synchronized void goIn() throws InterruptedException {
+	public synchronized void acquire() throws InterruptedException {
 		while (occupiedSeats >= maxSeats)
 			wait();
 		occupiedSeats++;
+		System.out.println("Sitz wurde besetzt, " + occupiedSeats
+				+ " Sitze belegt.");
 	}
 
-	public synchronized void goOut() {
+	public synchronized void release() {
 		this.occupiedSeats--;
+		System.out.println("Sitz wurde frei, " + occupiedSeats
+				+ " Sitze belegt.");
 		notifyAll();
+	}
+
+	public synchronized int availablePermits() {
+		return (maxSeats - occupiedSeats);
 	}
 }
