@@ -58,7 +58,7 @@ public class GUI extends javax.swing.JFrame {
 		if (System.getProperty("os.name").equals("Linux")) {
 			topenCommand.setText("firefox");
 			DELIM = "/";
-		} else if (System.getProperty("os.name").equals("Windows")) {
+		} else if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
 			topenCommand.setText("cmd /c start");
 			DELIM = "\\";
 		}
