@@ -56,11 +56,12 @@ public class ServerIImpl extends UnicastRemoteObject implements ServerI {
 			}
 		}
 
-		GlobalFileInfo[] resultlist = new GlobalFileInfo[result.size()];
-		for (int i = 0; i < result.size(); i++) {
-			resultlist[i] = result.get(i);
-		}
+		// GlobalFileInfo[] resultlist = new GlobalFileInfo[result.size()];
+		// for (int i = 0; i < result.size(); i++) {
+		// resultlist[i] = result.get(i);
+		// }
 
+		GlobalFileInfo[] resultlist = result.toArray(new GlobalFileInfo[result.size()]);
 		return resultlist;
 	}
 
