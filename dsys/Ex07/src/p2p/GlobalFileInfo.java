@@ -29,4 +29,5 @@ public class GlobalFileInfo extends LocalFileInfo {
 	public ClientI getClient() {
 		return client;
 	}
+
 }

@@ -30,4 +30,9 @@ public class LocalFileInfo implements Serializable {
 		return filePath;
 	}
 
+	@Override
+	public String toString() {
+		return fileName;
+	}
+
 }
