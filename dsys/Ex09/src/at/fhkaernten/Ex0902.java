@@ -14,6 +14,15 @@ public class Ex0902 {
 	public static void main(String[] args) {
 
 		/**
+		 * Aus dem WSDL wurden mittels wsimport die Java Klassen erstellt.
+		 * 
+		 * wsimport -d path/to/bin -keep -s path/to/src -p com.example http://example.com/example.wsdl
+		 * 
+		 * -d Pfad für .class Dateien
+		 * -keep Source Dateien sollen behalten werden
+		 * -s Pfad für .java Dateien
+		 * -p Packagename für die generierten Klassen
+		 * 
 		 * Der Webservice liefert Informationen über die Anzahl der Einwohner
 		 * anhand Eines ZIP-Codes. Außerdem können Informationen über Anzahl der
 		 * Häuser und die Verteilung der Einwohnerzahl auf Alter und ethnische
@@ -25,8 +34,19 @@ public class Ex0902 {
 		 * 
 		 * DeFactoSF1Part1ByNameState(String place, String state, String, key)
 		 * DeFactoSF1Part1ByZip(String zip, String key)
+		 * 
+		 * Diese beiden Methoden geben als Rückgabewert ein Objekt der Klasse BigZip zurück.
+		 * Mit getter Methoden kann dann auf die einzelnen Variablen dieses Objekts zugegriffen werden.
+		 * Je nach Art des Datensatzes handelt es sich dabei um integer (zB Nummer der Häuser) oder um einen String
+		 * (zB der ZIP Code)
+		 * 
 		 * DeFactoSF1Part2ByNameState(String place, String state, String key)
 		 * DeFactoSF1Part2ByZip(String zip, String key)
+		 * 
+		 * Diese beiden Methoden geben als Rückgabewert ein Objekt der Klasse DefactoZip2 zurück.
+		 * Mit getter Methoden kann dann auf die einzelnen Variablen dieses Objekts zugegriffen werden.
+		 * Je nach Art des Datensatzes handelt es sich dabei um integer (zB Nummer der Häuser) oder um einen String
+		 * (zB der ZIP Code)
 		 * 
 		 * Manueller SOAP Request
 		 * 
@@ -45,6 +65,7 @@ public class Ex0902 {
   				</soap12:Body>
 				</soap12:Envelope>
 		 */
+		
 		DeFactoSF1Soap defactoservice = new DeFactoSF1().getDeFactoSF1Soap();
 		Scanner sc = new Scanner(System.in);
 
