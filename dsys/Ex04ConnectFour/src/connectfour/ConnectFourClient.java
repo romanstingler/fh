@@ -6,7 +6,6 @@ import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -29,6 +28,10 @@ public class ConnectFourClient extends UnicastRemoteObject implements
 	protected ConnectFourClient(String name) throws RemoteException {
 		super();
 		this.name = name;
+	}
+
+	public ConnectFourClientI getPartner() {
+		return partner;
 	}
 
 	@Override

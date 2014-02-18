@@ -1,0 +1,6 @@
+Start Server: ConnectFourServer
+Start Client: ConnectFourClient
+
+Bedienung Client:
+
+1-7 für Auswahl der Spalte (GUI Fenster muss aktiv sein), andere Tasten setzen Auswahl zurück
