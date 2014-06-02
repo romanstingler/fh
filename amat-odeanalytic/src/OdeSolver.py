@@ -57,20 +57,23 @@ def odeplot(x_analytic):
 
     fig = plt.figure()
     ax = fig.add_subplot(1, 2, 1, projection='3d', label='electron movement')
-    ax.plot(x_exact[:, 0], x_exact[:, 2], x_exact[:, 4], color=((0,0,0,1)), lw=2, label='analytic')
-    ax.plot(x_euler[:, 0], x_euler[:, 2], x_euler[:, 4], color=((1,0,0.2,0.8)), lw=2, label='euler')
-    ax.plot(x_heun[:, 0], x_heun[:, 2], x_heun[:, 4], color=((0,0,1,0.5)), lw=2, label='heun')
-    ax.plot(wsol[:, 0], wsol[:, 2], wsol[:, 4], color=((0,1,0,0.8)), lw=2, label='LSODA')
+    ax.plot(x_exact[:, 0], x_exact[:, 2], x_exact[:, 4], color=((0, 0, 0, 1)), lw=2, label='analytic')
+    ax.plot(x_euler[:, 0], x_euler[:, 2], x_euler[:, 4], color=((1, 0, 0.2, 0.8)), lw=2, label='euler')
+    ax.plot(x_heun[:, 0], x_heun[:, 2], x_heun[:, 4], color=((0, 0, 1, 0.5)), lw=2, label='heun')
+    ax.plot(wsol[:, 0], wsol[:, 2], wsol[:, 4], color=((0, 1, 0, 0.8)), lw=2, label='LSODA')
     ax.set_xlabel("X Axis")
     ax.set_ylabel("Y Axis")
     ax.set_zlabel("Z Axis")
-    legend(('Analytic','Euler', 'Heun', 'LSODA'), loc='upper left')
+    legend(('Analytic', 'Euler', 'Heun', 'LSODA'), loc='upper left')
     title('Solutions of electron movement')
-
+    
+    eeuler = numpy.sqrt((x_euler[:, 0] - x_exact[:, 0]) ** 2 + (x_euler[:, 2] - x_exact[:, 2]) ** 2 + (x_euler[:, 4] - x_exact[:, 4]) ** 2)
+    eheun = numpy.sqrt((x_heun[:, 0] - x_exact[:, 0]) ** 2 + (x_heun[:, 2] - x_exact[:, 2]) ** 2 + (x_heun[:, 4] - x_exact[:, 4]) ** 2)
+    ewsol = numpy.sqrt((wsol[:, 0] - x_exact[:, 0]) ** 2 + (wsol[:, 2] - x_exact[:, 2]) ** 2 + (wsol[:, 4] - x_exact[:, 4]) ** 2)
+    absexact = numpy.sqrt(x_exact[:, 0]**2 + x_exact[:, 2]**2 + x_exact[:, 4]**2)
+    
     subplot(1, 2, 2)
-    plot(tn, numpy.abs(x_euler[:, 0])- numpy.abs(x_exact[:, 0]) + numpy.abs(x_euler[:, 2]) - numpy.abs(x_exact[:, 2]) + numpy.abs(x_euler[:, 4]) - numpy.abs(x_exact[:, 4]), 'r',
-         tn, numpy.abs(x_heun[:, 0])- numpy.abs(x_exact[:, 0]) + numpy.abs(x_heun[:, 2]) - numpy.abs(x_exact[:, 2]) + numpy.abs(x_heun[:, 4]) - numpy.abs(x_exact[:, 4]), 'g',
-         tn, numpy.abs(wsol[:, 0])- numpy.abs(x_exact[:, 0]) + numpy.abs(wsol[:, 2]) - numpy.abs(x_exact[:, 2]) + numpy.abs(wsol[:, 4]) - numpy.abs(x_exact[:, 4]), 'k')
+    plot(tn, numpy.divide(eeuler, absexact), 'r', tn, numpy.divide(eheun, absexact), 'g', tn, numpy.divide(ewsol, absexact), 'k')   
     xlabel('$t$')
     ylabel('$x - x^*$')
     title('Errors in solutions')
